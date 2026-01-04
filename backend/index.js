@@ -21,20 +21,11 @@ app.use(cookieParser());
 /* ✅ CORS (your origin kept exactly the same) */
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://energetic-ai-assignment-zfb1.vercel.app",
-    ],
+    origin: "https://energetic-ai-assignment.onrender.com",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-/* 🔹 Preflight support */
-// app.options("*", cors());
-
-/* 🔹 Routes */
 app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
