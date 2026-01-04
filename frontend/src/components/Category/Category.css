@@ -1,0 +1,84 @@
+.category-card {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Image */
+.category-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #f8fafc;
+  padding: 12px;
+}
+
+/* Footer */
+.card-footer {
+  padding: 16px;
+  text-align: center;
+}
+
+.card-footer h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-footer p {
+  font-size: 12px;
+  color: #6b7280;
+}
+.category-card {
+  position: relative;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+}
+
+.category-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.category-card h3 {
+  margin: 12px 0 6px;
+}
+
+.category-card p {
+  color: #777;
+}
+
+.edit-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.category-card:hover .edit-btn {
+  opacity: 1;
+}

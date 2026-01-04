@@ -1,0 +1,52 @@
+.admin-navbar {
+  height: 64px;
+  background: #000;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-center input {
+  width: 280px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-icon {
+  cursor: pointer;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
