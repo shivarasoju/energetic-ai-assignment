@@ -68,7 +68,7 @@ const Register = () => {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/auth/register",
+        "https://energetic-ai-assignment.onrender.com/api/auth/register",
         {
           fullName: formData.fullName,
           email: formData.email,

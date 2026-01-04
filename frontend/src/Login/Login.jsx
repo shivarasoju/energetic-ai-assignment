@@ -18,9 +18,12 @@ const Login = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/auth/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://energetic-ai-assignment.onrender.com/api/auth/me",
+          {
+            withCredentials: true,
+          }
+        );
 
         if (res.status === 200) {
           navigate("/", { replace: true });
@@ -64,7 +67,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        "https://energetic-ai-assignment.onrender.com/api/auth/login",
         formData,
         { withCredentials: true }
       );

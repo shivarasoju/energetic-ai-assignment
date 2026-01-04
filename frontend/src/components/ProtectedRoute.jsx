@@ -9,9 +9,12 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.get("http://localhost:3000/api/auth/me", {
-          withCredentials: true,
-        });
+        await axios.get(
+          "https://energetic-ai-assignment.onrender.com/api/auth/me",
+          {
+            withCredentials: true,
+          }
+        );
         setIsAuth(true);
       } catch (error) {
         setIsAuth(false);

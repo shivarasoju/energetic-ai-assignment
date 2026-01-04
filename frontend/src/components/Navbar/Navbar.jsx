@@ -1,5 +1,5 @@
 import { Bell, MessageSquare } from "lucide-react";
-import "./navbar.css";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
