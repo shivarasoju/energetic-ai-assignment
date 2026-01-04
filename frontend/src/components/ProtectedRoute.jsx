@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../utils/axios";
 
 const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -9,12 +9,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.get(
-          "https://energetic-ai-assignment.onrender.com/api/auth/me",
-          {
-            withCredentials: true,
-          }
-        );
+        await axiosInstance.get("/auth/me");
         setIsAuth(true);
       } catch (error) {
         setIsAuth(false);

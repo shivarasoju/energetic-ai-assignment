@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
-import axios from "axios";
+import axiosInstance from "../utils/axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,17 +16,18 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  // 🔐 Check authentication using Bearer token
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/auth/me", {
-          withCredentials: true,
-        });
+        const res = await axiosInstance.get("/auth/me");
 
         if (res.status === 200) {
           navigate("/", { replace: true });
         }
-      } catch (error) {}
+      } catch (error) {
+        // not authenticated → stay on register
+      }
     };
 
     checkAuth();
@@ -67,15 +68,14 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await axios.post(
-        "https://energetic-ai-assignment.onrender.com/api/auth/register",
-        {
-          fullName: formData.fullName,
-          email: formData.email,
-          password: formData.password,
-        },
-        { withCredentials: true }
-      );
+      const response = await axiosInstance.post("/auth/register", {
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      // ✅ Store token returned from backend
+      localStorage.setItem("token", response.data.token);
 
       navigate("/", { replace: true });
     } catch (error) {

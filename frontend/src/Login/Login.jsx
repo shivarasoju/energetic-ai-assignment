@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../utils/axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,20 +15,15 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // 🔐 Check authentication using Bearer token
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(
-          "https://energetic-ai-assignment.onrender.com/api/auth/me",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axiosInstance.get("/auth/me");
 
         if (res.status === 200) {
           navigate("/", { replace: true });
         }
-        // console.log(res.data);
       } catch (error) {
         // not authenticated → stay on login
       }
@@ -66,12 +61,10 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "https://energetic-ai-assignment.onrender.com/api/auth/login",
-        formData,
-        { withCredentials: true }
-      );
-      // console.log(response.data);
+      const response = await axiosInstance.post("/auth/login", formData);
+
+      // ✅ Store token
+      localStorage.setItem("token", response.data.token);
 
       navigate("/", { replace: true });
     } catch (error) {
