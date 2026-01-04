@@ -21,7 +21,7 @@ app.use(cookieParser());
 /* ✅ CORS (your origin kept exactly the same) */
 app.use(
   cors({
-    origin: "https://energetic-ai-assignment.onrender.com",
+    origin: "https://energetic-ai-assignment-zfb1.vercel.app",
     credentials: true,
   })
 );
