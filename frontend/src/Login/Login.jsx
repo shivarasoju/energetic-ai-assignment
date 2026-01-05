@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axios";
+import AuthContext from "../contex";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,26 +12,11 @@ const Login = () => {
     password: "",
   });
 
+  const { setAuthUser } = useContext(AuthContext);
+
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  // 🔐 Check authentication using Bearer token
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await axiosInstance.get("/auth/me");
-
-        if (res.status === 200) {
-          navigate("/", { replace: true });
-        }
-      } catch (error) {
-        // not authenticated → stay on login
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,7 +48,9 @@ const Login = () => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
-      localStorage.setItem("token", response.data.token);
+
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setAuthUser(response.data.user);
 
       navigate("/", { replace: true });
     } catch (error) {

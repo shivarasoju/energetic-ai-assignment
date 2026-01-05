@@ -16,23 +16,6 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // 🔐 Check authentication using Bearer token
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await axiosInstance.get("/auth/me");
-
-        if (res.status === 200) {
-          navigate("/", { replace: true });
-        }
-      } catch (error) {
-        // not authenticated → stay on register
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
@@ -73,9 +56,7 @@ const Register = () => {
         email: formData.email,
         password: formData.password,
       });
-
-      // ✅ Store token returned from backend
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
       navigate("/", { replace: true });
     } catch (error) {

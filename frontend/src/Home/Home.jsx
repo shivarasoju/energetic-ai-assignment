@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Navbar from "../components/Navbar/Navbar";
 import CategoryCard from "../components/Category/CategoryCard";
 import "./Home.css";
 import { initial } from "../assets/assets";
+import AuthContext from "../contex";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -14,41 +15,20 @@ const Categories = () => {
     image: "",
   });
 
-  //Load from localStorage
+  const { authUser, setAuthUser } = useContext(AuthContext);
+
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("categories"));
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
     if (stored && stored.length > 0) {
       setCategories(stored);
     } else {
-      // const initial = [
-      //   {
-      //     title: "Men Clothes",
-      //     count: 24,
-      //     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-      //   },
-      //   {
-      //     title: "Women Clothes",
-      //     count: 12,
-      //     image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-      //   },
-      //   {
-      //     title: "Kids Wear",
-      //     count: 18,
-      //     image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea",
-      //   },
-      //   {
-      //     title: "Accessories",
-      //     count: 34,
-      //     image: "https://images.unsplash.com/photo-1519741497674-611481863552",
-      //   },
-      // ];
-
       setCategories(initial);
       localStorage.setItem("categories", JSON.stringify(initial));
     }
-  }, []);
+  }, [authUser]);
 
-  //Form handlers
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -63,7 +43,6 @@ const Categories = () => {
     }
   };
 
-  //Add category
   const handleSubmit = (e) => {
     e.preventDefault();
     const updated = [...categories, formData];
@@ -74,7 +53,6 @@ const Categories = () => {
     setShowPopup(false);
   };
 
-  //Update category (from child)
   const handleUpdateCategory = (oldTitle, updatedData) => {
     const updated = categories.map((c) =>
       c.title === oldTitle ? updatedData : c

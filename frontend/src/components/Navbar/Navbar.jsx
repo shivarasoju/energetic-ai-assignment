@@ -1,10 +1,22 @@
 import { Bell, MessageSquare } from "lucide-react";
 import "./Navbar.css";
+import AuthContext from "../../contex";
+import { useContext, useEffect } from "react";
 
 const Navbar = () => {
+  const { authUser, setAuthUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authUser) {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setAuthUser(JSON.parse(storedUser));
+      }
+    }
+  }, [authUser, setAuthUser]);
+
   return (
     <div className="admin-navbar">
-      {/* Left */}
       <div className="nav-left">
         <h2 className="logo">
           <span>🛒</span> fastcart
@@ -20,8 +32,10 @@ const Navbar = () => {
         <MessageSquare className="nav-icon" />
 
         <div className="profile-box">
-          <div className="profile-circle">N</div>
-          <span className="profile-name">Naga</span>
+          <div className="profile-circle">
+            {authUser?.fullName?.charAt(0).toUpperCase()}
+          </div>
+          <span className="profile-name">{authUser?.fullName}</span>
         </div>
       </div>
     </div>

@@ -1,24 +1,20 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axiosInstance from "../utils/axios";
 
 const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        await axiosInstance.get("/auth/me");
-        setIsAuth(true);
-      } catch (error) {
-        setIsAuth(false);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const user = localStorage.getItem("user");
 
-    checkAuth();
+    if (user) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+
+    setLoading(false);
   }, []);
 
   if (loading) {
