@@ -50,3 +50,39 @@
   justify-content: center;
   font-weight: 600;
 }
+/* Tablet screens */
+@media (max-width: 900px) {
+  .nav-center input {
+    width: 200px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+  .admin-navbar {
+    padding: 0 16px;
+  }
+
+  /* Hide search bar */
+  .nav-center {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  .profile-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
