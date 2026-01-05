@@ -62,8 +62,6 @@ const Login = () => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
-
-      // ✅ Store token
       localStorage.setItem("token", response.data.token);
 
       navigate("/", { replace: true });
