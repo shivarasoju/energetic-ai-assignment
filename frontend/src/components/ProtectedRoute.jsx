@@ -23,15 +23,9 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          color: "black",
-          backgroundColor: "white",
-          textAlign: "center",
-          marginTop: "40vh",
-        }}
-      >
-        Checking authentication...
+      <div className="container">
+        <div className="spinner"></div>
+        <p className="text">Checking authentication...</p>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import Register from "./Register/Register";
 import Home from "./Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./NotFound/NotFound";
+import "./App.css";
 
 function App() {
   return (
