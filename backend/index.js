@@ -12,9 +12,13 @@ const app = express();
 
 app.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://energetic-ai-assignment-zfb1.vercel.app",
+];
 app.use(
   cors({
-    origin: "https://energetic-ai-assignment-zfb1.vercel.app",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
